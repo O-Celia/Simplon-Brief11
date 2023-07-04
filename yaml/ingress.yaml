@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vote-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.middlewares: default-auth@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: default-whitelist@kubernetescrd
+spec:
+  rules:
+  - host: vote.simplon-celia.space
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /
+        backend:
+          service:
+            name: votecluster
+            port:
+              number: 80

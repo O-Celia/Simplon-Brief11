@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vote
+  labels:
+    app: votelabel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: votelabel
+  template:
+    metadata:
+      labels:
+        app: votelabel
+    spec:
+      containers:
+      - name: vote
+        image: celiaoued/vote-app:1.0.113
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "500Mi"
+          limits:
+            cpu: "200m"
+            memory: "1000Mi"
+        env:
+        - name: REDIS
+          value: "rediscluster"
+        - name: STRESS_SECS
+          value: "10"
+        - name: REDIS_PWD
+          valueFrom:
+            secretKeyRef:
+              name: redispw
+              key: password
