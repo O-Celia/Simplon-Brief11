@@ -4,10 +4,16 @@ metadata:
   name: vote-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/router.middlewares: default-auth@kubernetescrd,default-whitelist@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: default-auth@kubernetescrd,default-whitelist@kubernetescrd,default-redirect@kubernetescrd,default-sso@kubernetescrd
+    cert-manager.io/issuer: "certmanager"
+    traefik.ingress.kubernetes.io/router.tls.options: default-client-cert@kubernetescrd
 spec:
+  tls:
+    - hosts:
+        - voteapp.simplon-celia.space
+      secretName: tls-vote-ingress-http
   rules:
-  - host: vote.simplon-celia.space
+  - host: voteapp.simplon-celia.space
     http:
       paths:
       - pathType: ImplementationSpecific

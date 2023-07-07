@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+ name: certmanager
+spec:
+ acme:
+   email: celia.ouedrao@gmail.com
+   server: https://acme-v02.api.letsencrypt.org/directory
+   privateKeySecretRef:
+     # if not existing, it will register a new account and stores it
+     name: cert-account-key
+   solvers:
+     - http01:
+         ingress:
+           class: traefik

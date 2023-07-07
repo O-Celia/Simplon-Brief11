@@ -5,4 +5,4 @@ metadata:
 spec:
   ipWhiteList:
     sourceRange:
-      - 88.175.71.99
+      - 88.200.0.0
