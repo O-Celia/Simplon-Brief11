@@ -4,7 +4,7 @@ Ce projet vise à déployer une application de vote sur un cluster AKS, tout en 
 
 ## Objectif
 
--Déployer une application sur un cluster Kubernetes (AKS).
+- Déployer une application sur un cluster Kubernetes (AKS).
 - Configurer un contrôleur d’entrée (Traefik) pour gérer le routage et la sécurité.
 - Rendre l’application accessible via un domaine personnalisé sécurisé.
 
